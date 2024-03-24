@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PasswordController;
@@ -22,24 +23,25 @@ use Illuminate\Support\Facades\Route;
 
 # login
 Route::get('login', [LoginController::class, 'index'])->name('login');
-Route::post('login', [LoginController::class, 'authenticate'])->name('login.process');
-Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 
-Route::group(['middleware' => 'auth'], function () {
-    # main
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+# main
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    # task
-    Route::get('task/history', [TaskController::class, 'history'])->name('task.history');
-    Route::resource('task', TaskController::class);
+# task
+Route::get('task', [TaskController::class, 'index'])->name('task.index');
+Route::get('task/{task}', [TaskController::class, 'show'])->name('task.show');
 
-    # approvals
-    Route::resource('approval', ApprovalController::class)->only(['index', 'show', 'store']);
+# history
+Route::get('history', [HistoryController::class, 'index'])->name('history.index');
+Route::get('history/{history}', [HistoryController::class, 'show'])->name('history.show');
 
-    # notifications
-    Route::resource('notification', NotificationController::class)->only('index', 'show');
+# approvals
+Route::get('approval', [ApprovalController::class, 'index'])->name('approval.index');
+Route::get('approval/{approval}', [ApprovalController::class, 'show'])->name('approval.show');
 
-    # profile
-    Route::resource('profile', ProfileController::class)->only('index', 'update'); # done
-    Route::resource('password', PasswordController::class)->only('index', 'update'); # done
-});
+# notifications
+Route::get('notification', [NotificationController::class, 'index'])->name('notification.index');
+
+# profile
+Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('password', [PasswordController::class, 'index'])->name('password.index');

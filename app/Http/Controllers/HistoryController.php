@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class HistoryController extends Controller
 {
     public function index()
     {
-        return view('tasks.index');
+        return view('history.index');
     }
 
     public function show()
     {
-        return view('tasks.show');
+        return view('history.show');
     }
 }

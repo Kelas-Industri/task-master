@@ -9,11 +9,6 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('profile.index', [
-            'user' => User::find(1)
-        ]);
+        return view('profile.index');
     }
-
-    public function update()
-    { }
 }

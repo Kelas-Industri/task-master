@@ -1,8 +1,0 @@
-Layouting
-- Login
-
-Seeding
-- User
-- Kategori
-- Sub Kategori
-
