@@ -15,7 +15,10 @@
     <style>
         .nav-link.dropdown-toggle::after {
             display: none !important;
-            /* Hide the caret */
+        }
+
+        .table-responsive table {
+            white-space: nowrap;
         }
     </style>
 
