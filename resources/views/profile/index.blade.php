@@ -1,5 +1,3 @@
-<!-- resources/views/profile/show.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -23,8 +21,6 @@
                                 <label for="email" class="form-label">{{ __('Email') }}</label>
                                 <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                             </div>
-
-                            <!-- Add more editable profile fields here -->
 
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">{{ __('Update Profile') }}</button>

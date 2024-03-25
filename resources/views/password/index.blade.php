@@ -10,6 +10,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('password.update', ['password' => $user]) }}">
                             @csrf
+                            @method('PUT')
 
                             <div class="mb-3">
                                 <label for="current_password" class="form-label">{{ __('Current Password') }}</label>
