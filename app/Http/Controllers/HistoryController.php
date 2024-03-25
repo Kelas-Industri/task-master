@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class NotificationController extends Controller
+class HistoryController extends Controller
 {
     public function index()
     {
-        return view('notifications.index');
+        return view('history.index');
     }
 
     public function show()
+    { }
+
+    public function store()
     { }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PasswordController;
@@ -30,8 +31,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     # task
-    Route::get('task/history', [TaskController::class, 'history'])->name('task.history');
     Route::resource('task', TaskController::class);
+
+    # history
+    Route::resource('history', HistoryController::class);
 
     # approvals
     Route::resource('approval', ApprovalController::class)->only(['index', 'show', 'store']);
