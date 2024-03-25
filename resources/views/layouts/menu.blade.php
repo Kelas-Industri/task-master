@@ -39,7 +39,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle @if (Route::is('profile.*') || Route::is('password.*')) active @endif" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ auth()->user()->name }}
+                    Arif Niwang
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownProfile">
                     <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a></li>
