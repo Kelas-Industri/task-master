@@ -10,6 +10,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
+use App\Mail\WelcomeEmail;
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,4 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
     # profile
     Route::resource('profile', ProfileController::class)->only('index', 'update'); # done
     Route::resource('password', PasswordController::class)->only('index', 'update'); # done
+});
+
+Route::get('mail', function () {
+    Mail::to('example@email.com')->send(new WelcomeEmail());
 });

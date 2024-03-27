@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('category');
             $table->string('sub_category');
             $table->string('evidence')->nullable();
-            $table->dateTime('date_start');
-            $table->dateTime('date_end');
+            $table->date('date_start');
+            $table->date('date_end');
             $table->enum('status', ['In Progress', 'Waiting Approval', 'Approved', 'Rejected'])->default('In Progress');
             $table->string('creator');
             $table->timestamps();

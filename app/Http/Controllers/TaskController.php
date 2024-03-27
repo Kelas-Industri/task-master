@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewTaskEmail;
+use App\Mail\WelcomeEmail;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TaskController extends Controller
 {
     public function index()
     {
         $tasks = Task::with('employeeDetail')->paginate();
+
+        $task = Task::find(3);
+        Mail::to($task->employee)->send(new NewTaskEmail($task));
 
         return view('tasks.index', compact('tasks'));
     }
@@ -66,6 +72,7 @@ class TaskController extends Controller
         $task->save();
 
         # notification
+        Mail::to($request->employee)->send(new NewTaskEmail($task));
 
         // Redirect to the task index page
         return redirect()->route('task.index')->with('success', 'Task created successfully.');
@@ -74,9 +81,9 @@ class TaskController extends Controller
     public function show($id)
     {
         $task = Task::findOrFail($id);
-        $historyProgress = TaskProgress::where('task_id', $id)->get();
-        $historyApprovals = TaskApproval::where('task_id', $id)->get();
-        return view('tasks.show', compact('task', 'historyProgress', 'historyApprovals'));
+        // $historyProgress = TaskProgress::where('task_id', $id)->get();
+        // $historyApprovals = TaskApproval::where('task_id', $id)->get();
+        return view('tasks.show', compact('task'));
     }
 
     public function edit($id)
@@ -103,7 +110,7 @@ class TaskController extends Controller
         $task->creator = $request->creator;
         $task->save();
 
-        return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
+        return redirect()->route('task.index')->with('success', 'Task updated successfully.');
     }
 
     public function destroy($id)
@@ -115,6 +122,8 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $task->delete();
 
-        return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 }
